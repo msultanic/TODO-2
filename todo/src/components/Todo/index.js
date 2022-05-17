@@ -1,31 +1,41 @@
-import React from "react";
-import Header from "../Header";
+import React, { useEffect, useState } from "react";
+import { MemoizedHeader } from "../Header";
 import Content from "../Content";
-import Footer from "../Footer";
+import { MemoizedFooter } from "../Footer";
+import Axios from "axios";
 
 const Todo = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [existTodo, setExistTodo] = useState(false);
+
+  useEffect(() => {
+    if (!existTodo) {
+      setLoading(true);
+      Axios.get("https://jsonplaceholder.typicode.com/todos")
+        .then((response) => {
+          console.log(response.data);
+          setData(response.data.slice(0, 20));
+        })
+        .catch((error) => console.log(error))
+        .finally(() => {
+          setLoading(false);
+          setExistTodo(true);
+        });
+
+      console.log("hvata podatke");
+    }
+  }, [existTodo]);
+
+  console.log("Babo", data);
+
   return (
     <div className="todo">
-      <Header />
-      <Content />
-      <Footer />
+      <MemoizedHeader />
+      <Content data={data} loading={loading} existTodo={existTodo} />
+      <MemoizedFooter />
     </div>
   );
 };
 
 export default Todo;
-
-// <
-//       <div className="todo-header">
-//         <div className="todo-header-icon"></div>
-//         <div className="todo-header-text">
-//           <h1>selam</h1>
-//         </div>
-//       </div>
-//       <div className="todo-content">
-//         <div className="todo-content-item"></div>
-//       </div>
-//       <div className="todo-footer">
-//         <div className="todo-footer-button"></div>
-//       </div>
-//     </>

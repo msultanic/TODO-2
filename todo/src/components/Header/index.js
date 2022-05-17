@@ -9,10 +9,10 @@ const Header = () => {
         <div className="todo-header-img-line"></div>
       </div>
       <div className="todo-header-text text">
-        <p>Motiff To-do List</p>
+        <p> Motiff To-do List</p>
       </div>
     </div>
   );
 };
 
-export default Header;
+export const MemoizedHeader = React.memo(Header);

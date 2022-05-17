@@ -13,4 +13,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export const MemoizedFooter = React.memo(Footer);

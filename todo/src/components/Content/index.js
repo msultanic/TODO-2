@@ -1,21 +1,16 @@
 import React from "react";
 import ContentItem from "../ContentItem";
 
-const Content = () => {
+const Content = ({ data, loading, existTodo }) => {
   return (
     <div className="todo-content">
       <div className="todo-content-container">
-        <ContentItem />
-        <ContentItem />
-        <ContentItem />
-        <ContentItem />
-        <ContentItem />
-        <ContentItem />
-        <ContentItem />
-        <ContentItem />
-        <ContentItem />
-        <ContentItem />
-        <ContentItem />
+        {loading && <h1>KAKO JE</h1>}
+        {existTodo &&
+          !loading &&
+          data.map((todo, index) => (
+            <ContentItem title={todo.title} key={index} />
+          ))}
       </div>
     </div>
   );

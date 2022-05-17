@@ -1,12 +1,14 @@
 import React from "react";
 
-const ContentItem = () => {
+const ContentItem = ({ title }) => {
+  title = title.length > 20 ? title.slice(0, 20) + "..." : title;
+
   return (
     <div className="todo-content-container-item">
       <div className="todo-content-container-item-radiotext">
         <button className="todo-content-container-item-radiotext-radio"></button>
         <div className="todo-content-container-item-radiotext-text">
-          <p>OpenSans-Semibold</p>
+          <p>{title}</p>
         </div>
       </div>
       <div className="todo-content-container-item-icons">
