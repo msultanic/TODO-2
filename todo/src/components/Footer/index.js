@@ -1,0 +1,16 @@
+import React from "react";
+
+const Footer = () => {
+  return (
+    <div className="todo-footer">
+      <div className="todo-footer-whitespace"></div>
+      <div className="todo-footer-button">
+        <div className="todo-footer-button-text text">
+          <p>+ New task</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Footer;
