@@ -1,18 +1,29 @@
 import React from "react";
+import { useSelector } from "react-redux";
+// import { closeModal } from "../../redux/reducers/dialogModal";
 
-const ConfirmModal = ({ toggleDialogModal, position }) => {
+//izbrisati lokaciju
+//zatvoriti ga
+
+const ConfirmModal = () => {
+  const position = useSelector((state) => state.modalPosition);
+  // let dispatch = useDispatch();
+
+  const toggleDialogModal = (e) => {
+    console.log(e);
+  };
+
   return (
     <div
-      id="confirmDialog"
+      className="confirm-modal"
       style={{
+        position: "absolute",
         top: position.top + 22,
-        // right: position.right - 100,
-        bottom: position.bottom,
-        left: position.left - 70,
+        left: position.left - 50,
       }}
     >
-      <p>Are you sure</p>
-      <div className="modal_button_container">
+      <p>Are you sure?</p>
+      <div className="confirm-modal-buttons">
         <span className="modal_button" onClick={() => toggleDialogModal(true)}>
           Yes
         </span>

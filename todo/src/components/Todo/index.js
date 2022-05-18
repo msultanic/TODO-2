@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MemoizedHeader } from "../Header";
 import Content from "../Content";
-import ConfirmModal from "../ConfirmModal";
 import { MemoizedFooter } from "../Footer";
 import Axios from "axios";
 import { useDispatch } from "react-redux";
@@ -14,7 +13,6 @@ const Todo = () => {
   const [existTodo, setExistTodo] = useState(false);
   let dispatch = useDispatch();
   const data = useSelector((state) => state.tasks);
-  const modalIsOpen = useSelector((state) => state.modalIsOpen);
 
   if (data.length === 0 && existTodo) setExistTodo(false);
 
@@ -48,7 +46,6 @@ const Todo = () => {
 
   return (
     <div className="todo">
-      {/* {modalIsOpen && <ConfirmModal />} */}
       <MemoizedHeader />
       <Content loading={loading} existTodo={existTodo} />
       <MemoizedFooter />

@@ -5,6 +5,7 @@ import { openModal } from "../../redux/reducers/dialogModal";
 import { updateIdOfActiveTask } from "../../redux/reducers/activeTask";
 import { useSelector } from "react-redux";
 import { updateTodo } from "../../redux/reducers/CRUD";
+import { setModalPosition } from "../../redux/reducers/dialogModalPosition";
 
 const ContentItem = ({ title, id }) => {
   const [activeEdit, setActiveEdit] = useState(false);
@@ -21,7 +22,9 @@ const ContentItem = ({ title, id }) => {
 
   //KAD OSTANE SAMO JEDNO SLOVO PONOVO NAPISE SVE
 
-  const handleDelete = () => {
+  const handleDelete = (e) => {
+    var position = e.target.getBoundingClientRect();
+    dispatch(setModalPosition(position));
     dispatch(openModal());
     // dispatch(deleteTodo(id));
   };

@@ -7,6 +7,7 @@ import { disableEditing } from "../../redux/reducers/updateTask";
 import { disableAddFrom } from "../../redux/reducers/addForm";
 import { addTodo } from "../../redux/reducers/CRUD";
 import { v1 as uuid } from "uuid";
+import ConfirmModal from "../ConfirmModal";
 
 const Content = ({ loading, existTodo }) => {
   const data = useSelector((state) => state.tasks);
@@ -14,6 +15,7 @@ const Content = ({ loading, existTodo }) => {
   const enableNewTask = useSelector((state) => state.updateEnabled);
   const task = useRef("");
   let dispatch = useDispatch();
+  const modalIsOpen = useSelector((state) => state.modalIsOpen);
 
   if (enableNewTask) {
     dispatch(
@@ -32,6 +34,7 @@ const Content = ({ loading, existTodo }) => {
 
   return (
     <div className="todo-content">
+      {modalIsOpen && <ConfirmModal />}
       {loading && (
         <div className="todo-content-center">
           <Circles color="#8e96b8" height={50} width={50} />

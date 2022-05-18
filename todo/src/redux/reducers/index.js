@@ -4,6 +4,7 @@ import { crudReducer } from "./CRUD";
 import { idOfActvieTaskReducer } from "./activeTask";
 import { activeUpdateTaskReducer } from "./updateTask";
 import { confirmModalReducer } from "./dialogModal";
+import { dialogModalPositionReducer } from "./dialogModalPosition";
 
 export const allReducers = combineReducers({
   addForm: showAddFormReducer,
@@ -11,4 +12,5 @@ export const allReducers = combineReducers({
   activeTask: idOfActvieTaskReducer,
   updateEnabled: activeUpdateTaskReducer,
   modalIsOpen: confirmModalReducer,
+  modalPosition: dialogModalPositionReducer,
 });
