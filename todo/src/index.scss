@@ -54,12 +54,20 @@ body{
     &-content{
         width: 345px;
         background-color: #fff;
+        min-height: 250px;
         font-weight: 600;
         color: #8e96b8;
         box-shadow: 0 2px 7px -2px rgba(0, 0, 0, 0.15);
         
+        &-center{
+            width: 100%;
+            margin-top: 100px;
+            display: flex;
+            justify-content: center;
+        }
+
         &-whitespace-top{
-            height: 34px;
+            height: 24px;
             background-color: #fff;
             width: 100%;
         }
@@ -70,9 +78,28 @@ body{
             width: 100%;
             background-color: #fff;
         }
-        
+        &-whitespace-bottom2{
+            margin-top: 0;
+            height: 122px;
+            width: 100%;
+            background-color: #fff;
+            &-input{
+                width: 270px;
+                height: 36px;
+                padding-left: 9px;
+                margin: 33px 0 0 45px;
+                object-fit: contain;
+                border-radius: 4px;
+                border: solid 1px #949cbc;
+                background-color: #f9f9f8;
+                font-weight: 600;
+                color: #8e96b8;
+                font-family: "Open Sans";
+                font-size: 16px;
+            }
+        }
         &-container{
-            padding: 0px 21px 1px 45px;
+            padding: 10px 17px 1px 45px;
             display: flex;
             flex-direction: column;
             gap: 21px;
@@ -95,6 +122,10 @@ body{
                     align-items: center;
                     gap: 24px;
 
+                    &-active{
+                        gap:15px
+                    }
+
                     &-radio{
                         width: 10px;
                         height: 10px;
@@ -102,16 +133,35 @@ body{
                         border: 1px solid #8e96b8;
                         border-radius: 50%;
                         cursor: pointer;
+
+                        &-active {
+                            border: solid 1px var(--bluey-grey);
+                            background-color: #af7eeb;
+                        }
                     }
 
-                    // &-text {
-                    //     padding-left: 24px;
-                    // }
+                    &-text {
+                        &-active{
+                            width: 194px;
+                            height: 36px;
+                            border-radius: 4px;
+                            border: solid 1px #949cbc;
+                            background-color: #f9f9f8;
+                            display: flex;
+                            align-items: center;
+                            font-weight: 600;
+                            color: #8e96b8;
+                            font-family: "Open Sans";
+                            font-size: 16px;
+                            padding-left: 10px;
+                        }
+                    }
                 }
 
                 &-icons{
                     gap: 12px;
                     margin-right: 0;
+                    display:flexbox;
 
                     &-pen {
                         color: #8e96b8;
@@ -121,8 +171,18 @@ body{
                         justify-content: center;
                         align-items: center;
                         border-radius: 3px;
-                        margin-right: 12px;
+                        margin-right: 4px;
                         cursor: pointer;
+
+                        &-active{
+                            display: inline-flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 3px;
+                            background-color: #eaebec;
+                            width: 20px;
+                            height: 20px;
+                        }
                     }
                     &-delete{
                         color: #8e96b8;
@@ -133,6 +193,13 @@ body{
                         align-items: center;
                         border-radius: 3px;
                         cursor: pointer;
+
+                        &-modal {
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 3px;
+                            background-color: #eaebec;
+                        }
                     }
                 }
             }
