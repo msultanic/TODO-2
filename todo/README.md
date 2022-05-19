@@ -2,7 +2,7 @@
 
 In the project directory, you can run:
 
-### `npm i`
+### `npm install --force`
 
 ### `npm start`
 
