@@ -13,23 +13,24 @@ const Content = ({ loading, existTodo }) => {
   const data = useSelector((state) => state.tasks);
   const newButton = useSelector((state) => state.addForm);
   const enableNewTask = useSelector((state) => state.updateEnabled);
-  const task = useRef("");
+  const taskDescription = useRef("");
   let dispatch = useDispatch();
   const modalIsOpen = useSelector((state) => state.modalIsOpen);
 
   if (enableNewTask) {
-    dispatch(
-      addTodo({
-        id: uuid(),
-        name: task.current,
-      })
-    );
+    if (taskDescription.current.length > 0)
+      dispatch(
+        addTodo({
+          id: uuid(),
+          name: taskDescription.current,
+        })
+      );
     dispatch(disableEditing());
     dispatch(disableAddFrom());
   }
 
   const handleTextInput = (e) => {
-    task.current = e.target.value;
+    taskDescription.current = e.target.value;
   };
 
   return (

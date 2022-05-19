@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { enableEditing } from "../../redux/reducers/updateTask";
 import { useSelector } from "react-redux";
 import { enableAddFrom } from "../../redux/reducers/addForm";
+import { deleteIdOfActiveTask } from "../../redux/reducers/activeTask";
+import { closeModal } from "../../redux/reducers/dialogModal";
+import { deleteModalPosition } from "../../redux/reducers/dialogModalPosition";
 
 const Footer = () => {
   let dispatch = useDispatch();
@@ -12,6 +15,9 @@ const Footer = () => {
     if (newButton) {
       dispatch(enableEditing());
     }
+    dispatch(deleteIdOfActiveTask());
+    dispatch(closeModal());
+    dispatch(deleteModalPosition());
     dispatch(enableAddFrom());
   };
 

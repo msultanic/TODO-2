@@ -1,16 +1,20 @@
-import { CHANGE_ACTIVE } from "../constants";
+import { SET_ACTIVE, DELETE_ACTIVE } from "../constants";
 
 export const idOfActvieTaskReducer = (state = -1, action) => {
-  if (action.type === CHANGE_ACTIVE) {
-    if (action.payload !== state) return action.payload;
-    return -1;
-  }
+  if (action.type === SET_ACTIVE) return action.payload;
+  else if (action.type === DELETE_ACTIVE) return -1;
   return state;
 };
 
-export function updateIdOfActiveTask(todoId) {
+export function setIdOfActiveTask(todoId) {
   return {
-    type: CHANGE_ACTIVE,
+    type: SET_ACTIVE,
     payload: todoId,
+  };
+}
+
+export function deleteIdOfActiveTask() {
+  return {
+    type: DELETE_ACTIVE,
   };
 }

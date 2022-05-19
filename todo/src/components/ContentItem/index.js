@@ -1,36 +1,68 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-// import { deleteTodo } from "../../redux/reducers/CRUD";
-import { openModal } from "../../redux/reducers/dialogModal";
-import { updateIdOfActiveTask } from "../../redux/reducers/activeTask";
+import { closeModal, openModal } from "../../redux/reducers/dialogModal";
+import {
+  setIdOfActiveTask,
+  deleteIdOfActiveTask,
+} from "../../redux/reducers/activeTask";
 import { useSelector } from "react-redux";
 import { updateTodo } from "../../redux/reducers/CRUD";
-import { setModalPosition } from "../../redux/reducers/dialogModalPosition";
+import {
+  deleteModalPosition,
+  setModalPosition,
+} from "../../redux/reducers/dialogModalPosition";
+import { disableAddFrom } from "../../redux/reducers/addForm";
+import { disableEditing } from "../../redux/reducers/updateTask";
 
 const ContentItem = ({ title, id }) => {
   const [activeEdit, setActiveEdit] = useState(false);
-  title = title.length > 20 ? title.slice(0, 20).trim() + "..." : title;
+  const [description, setDescription] = useState(title);
+
   let dispatch = useDispatch();
+
   const isActive = useSelector((state) => state.activeTask) === id;
-  const allowEdit = isActive && activeEdit;
-  const [description, setDescription] = useState("");
   const modalIsOpen = useSelector((state) => state.modalIsOpen);
+  const allowEdit = isActive && activeEdit;
+
+  title = title.length > 20 ? title.slice(0, 20).trim() + "..." : title;
 
   const handleTaskUpdate = (e) => {
     setDescription(e.target.value);
   };
 
-  //KAD OSTANE SAMO JEDNO SLOVO PONOVO NAPISE SVE
+  if (!isActive && activeEdit) setActiveEdit(false);
+
+  const handleActiveTask = () => {
+    if (isActive) {
+      dispatch(closeModal());
+      dispatch(deleteModalPosition());
+      setActiveEdit(false);
+      dispatch(deleteIdOfActiveTask(id));
+    } else dispatch(setIdOfActiveTask(id));
+    dispatch(disableAddFrom());
+    dispatch(disableEditing());
+  };
 
   const handleDelete = (e) => {
-    var position = e.target.getBoundingClientRect();
-    dispatch(setModalPosition(position));
-    dispatch(openModal());
-    // dispatch(deleteTodo(id));
+    setActiveEdit(false);
+    if (modalIsOpen) dispatch(closeModal());
+    else {
+      var position = e.target.getBoundingClientRect();
+      dispatch(setModalPosition(position));
+      dispatch(openModal());
+    }
+  };
+
+  const handlePencilButton = () => {
+    if (modalIsOpen) {
+      dispatch(closeModal());
+      dispatch(deleteModalPosition());
+    }
+    setActiveEdit(!activeEdit);
   };
 
   useEffect(() => {
-    if (description && !activeEdit)
+    if (description.length > 0 && !activeEdit)
       dispatch(updateTodo({ id, name: description }));
   }, [activeEdit]);
 
@@ -49,14 +81,14 @@ const ContentItem = ({ title, id }) => {
               ? "todo-content-container-item-radiotext-radio"
               : "todo-content-container-item-radiotext-radio todo-content-container-item-radiotext-radio-active"
           }
-          onClick={() => dispatch(updateIdOfActiveTask(id))}
+          onClick={handleActiveTask}
         ></button>
         {allowEdit ? (
           <input
             id="input"
             type="text"
             className="todo-content-container-item-radiotext-text-active"
-            value={description.length > 0 ? description : title}
+            value={description}
             onChange={handleTaskUpdate}
           />
         ) : (
@@ -73,7 +105,7 @@ const ContentItem = ({ title, id }) => {
                 ? "fa fa-pencil todo-content-container-item-icons-pen-active"
                 : "fa fa-pencil todo-content-container-item-icons-pen"
             }
-            onClick={() => setActiveEdit(!activeEdit)}
+            onClick={handlePencilButton}
           ></i>
           <i
             className={

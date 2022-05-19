@@ -1,16 +1,27 @@
 import React from "react";
 import { useSelector } from "react-redux";
-// import { closeModal } from "../../redux/reducers/dialogModal";
-
-//izbrisati lokaciju
-//zatvoriti ga
+import { closeModal } from "../../redux/reducers/dialogModal";
+import { deleteModalPosition } from "../../redux/reducers/dialogModalPosition";
+import { deleteTodo } from "../../redux/reducers/CRUD";
+import { useDispatch } from "react-redux";
+import { deleteIdOfActiveTask } from "../../redux/reducers/activeTask";
 
 const ConfirmModal = () => {
   const position = useSelector((state) => state.modalPosition);
-  // let dispatch = useDispatch();
+  const id = useSelector((state) => state.activeTask);
 
-  const toggleDialogModal = (e) => {
-    console.log(e);
+  let dispatch = useDispatch();
+
+  const confirmAction = () => {
+    dispatch(deleteTodo(id));
+    dispatch(deleteModalPosition());
+    dispatch(closeModal());
+    dispatch(deleteIdOfActiveTask(id));
+  };
+
+  const denyAction = () => {
+    dispatch(deleteModalPosition());
+    dispatch(closeModal());
   };
 
   return (
@@ -24,10 +35,10 @@ const ConfirmModal = () => {
     >
       <p>Are you sure?</p>
       <div className="confirm-modal-buttons">
-        <span className="modal_button" onClick={() => toggleDialogModal(true)}>
+        <span className="confirm-modal-buttons-text" onClick={confirmAction}>
           Yes
         </span>
-        <span className="modal_button" onClick={() => toggleDialogModal(false)}>
+        <span className="confirm-modal-buttons-text" onClick={denyAction}>
           No
         </span>
       </div>
