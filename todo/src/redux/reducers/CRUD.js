@@ -65,6 +65,16 @@ export function deleteTodo(id) {
 }
 
 export function updateTodo(todo) {
+  console.log("update");
+
+  Axios(`http://localhost:3002/task/${todo.id}`, {
+    method: "PUT",
+    data: {
+      id: todo.id,
+      title: todo.title,
+    },
+  });
+
   return {
     type: UPDATE_TODO,
     payload: todo,
