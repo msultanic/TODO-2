@@ -12,9 +12,8 @@ const Footer = () => {
   const newButton = useSelector((state) => state.addForm);
 
   const handleButtonActions = () => {
-    if (newButton) {
-      dispatch(enableEditing());
-    }
+    if (newButton) dispatch(enableEditing());
+
     dispatch(deleteIdOfActiveTask());
     dispatch(closeModal());
     dispatch(deleteModalPosition());

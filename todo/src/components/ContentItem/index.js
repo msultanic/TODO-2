@@ -67,7 +67,7 @@ const ContentItem = ({ title, id }) => {
 
   useEffect(() => {
     if (description.length > 0 && !activeEdit)
-      dispatch(updateTodo({ id, name: description }));
+      dispatch(updateTodo({ id, title: description }));
   }, [activeEdit]);
 
   return (

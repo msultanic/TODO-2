@@ -22,7 +22,7 @@ const Content = ({ loading, existTodo }) => {
       dispatch(
         addTodo({
           id: uuid(),
-          name: taskDescription.current,
+          title: taskDescription.current,
         })
       );
     taskDescription.current = "";
@@ -51,7 +51,7 @@ const Content = ({ loading, existTodo }) => {
         {existTodo &&
           !loading &&
           data.map((todo, index) => (
-            <ContentItem title={todo.name} key={todo.id} id={todo.id} />
+            <ContentItem title={todo.title} key={todo.id} id={todo.id} />
           ))}
       </div>
       <div

@@ -1,4 +1,5 @@
 import { ADD_TODO, UPDATE_TODO, DELETE_TODO } from "../constants";
+import Axios from "axios";
 
 export const crudReducer = (data = [], action) => {
   let newTodos;
@@ -31,16 +32,35 @@ export const crudReducer = (data = [], action) => {
 };
 
 export function addTodo(todo) {
+  // clear();
+  Axios.post(`http://localhost:3002/task`, todo)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => console.log("ne valja", error));
+
   return {
     type: ADD_TODO,
     payload: todo,
   };
 }
 
-export function deleteTodo(todoId) {
+export function addTodoBase(todo) {
+  return {
+    type: ADD_TODO,
+    payload: todo,
+  };
+}
+
+export function deleteTodo(id) {
+  Axios({
+    method: "DELETE",
+    url: `http://localhost:3002/task/` + id,
+  });
+
   return {
     type: DELETE_TODO,
-    payload: todoId,
+    payload: id,
   };
 }
 
