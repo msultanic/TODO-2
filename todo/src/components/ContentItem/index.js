@@ -85,7 +85,7 @@ const ContentItem = ({ title, id }) => {
         ></button>
         {allowEdit ? (
           <input
-            id="input"
+            autoFocus
             type="text"
             className="todo-content-container-item-radiotext-text-active"
             value={description}

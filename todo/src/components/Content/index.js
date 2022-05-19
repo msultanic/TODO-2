@@ -59,6 +59,7 @@ const Content = ({ loading, existTodo }) => {
       >
         {newButton && (
           <input
+            autoFocus
             type="text"
             className="todo-content-whitespace-bottom2-input"
             onChange={handleTextInput}
