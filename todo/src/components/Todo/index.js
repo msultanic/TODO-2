@@ -33,7 +33,7 @@ const Todo = () => {
     data.forEach((todo) => {
       dispatch(
         addTodoBase({
-          id: uuid(),
+          id: todo.id,
           title: todo.title,
         })
       );
@@ -45,6 +45,7 @@ const Todo = () => {
     let tasksFromBase;
     await Axios.get("http://localhost:3002/task")
       .then((response) => {
+        console.log("hej", response.data);
         tasksFromBase = response.data;
         addDataBase(response.data);
       })
