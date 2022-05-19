@@ -25,6 +25,7 @@ const Content = ({ loading, existTodo }) => {
           name: taskDescription.current,
         })
       );
+    taskDescription.current = "";
     dispatch(disableEditing());
     dispatch(disableAddFrom());
   }
