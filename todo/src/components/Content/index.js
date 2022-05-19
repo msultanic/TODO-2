@@ -3,7 +3,7 @@ import ContentItem from "../ContentItem";
 import { useSelector } from "react-redux";
 import { Circles } from "react-loader-spinner";
 import { useDispatch } from "react-redux";
-import { disableEditing } from "../../redux/reducers/updateTask";
+import { disableEditing, enableEditing } from "../../redux/reducers/updateTask";
 import { disableAddFrom } from "../../redux/reducers/addForm";
 import { addTodo } from "../../redux/reducers/CRUD";
 import { v1 as uuid } from "uuid";
@@ -29,6 +29,10 @@ const Content = ({ loading, existTodo }) => {
     dispatch(disableEditing());
     dispatch(disableAddFrom());
   }
+
+  const handleKeypress = (e) => {
+    if (e.key === "Enter") dispatch(enableEditing());
+  };
 
   const handleTextInput = (e) => {
     taskDescription.current = e.target.value;
@@ -59,6 +63,7 @@ const Content = ({ loading, existTodo }) => {
       >
         {newButton && (
           <input
+            onKeyPress={handleKeypress}
             autoFocus
             type="text"
             className="todo-content-whitespace-bottom2-input"

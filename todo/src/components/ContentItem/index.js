@@ -43,6 +43,10 @@ const ContentItem = ({ title, id }) => {
     dispatch(disableEditing());
   };
 
+  const handleKeypress = (e) => {
+    if (e.key === "Enter") handlePencilButton();
+  };
+
   const handleDelete = (e) => {
     setActiveEdit(false);
     if (modalIsOpen) dispatch(closeModal());
@@ -85,6 +89,7 @@ const ContentItem = ({ title, id }) => {
         ></button>
         {allowEdit ? (
           <input
+            onKeyPress={handleKeypress}
             autoFocus
             type="text"
             className="todo-content-container-item-radiotext-text-active"
